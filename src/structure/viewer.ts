@@ -778,6 +778,7 @@ export class MoleculeViewer {
             this._viewer.render();
         };
 
+        this._options.cartoon.onchange.push(restyleAndRender);
         this._options.spaceFilling.onchange.push(restyleAndRender);
         this._options.bonds.onchange.push(restyleAndRender);
         this._options.atoms.onchange.push(restyleAndRender);
@@ -1570,6 +1571,13 @@ export class MoleculeViewer {
                     opacity: defaultOpacity(),
                 };
             }
+        } else if (bgStyle === 'cartoon') {
+                style.cartoon = {
+                color: this._options.environments.bgColor.value === 'grey' ? 0x808080 : undefined,
+                opacity: defaultOpacity(),
+                thickness: 0.3,
+                arrows: true,
+            } as unknown as $3Dmol.CartoonStyleSpec;
         } else {
             unreachable();
         }
